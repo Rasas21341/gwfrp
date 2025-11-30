@@ -1,0 +1,65 @@
+/* Basic Reset for a cleaner look */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* A clear, non-fancy font */
+    background-color: #f4f4f4; /* Light background for the page */
+    color: #333;
+}
+
+/* --- Navigation Bar Styling --- */
+
+.navbar {
+    background-color: #1a1a1a; /* Dark background color (like a classic/mature website) */
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between; /* Puts the title on one end and links on the other */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.site-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff; /* White color for the title */
+    text-decoration: none; /* Removes the underline from the link */
+    padding: 5px 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px; /* Spacing between the navigation items */
+}
+
+.nav-item {
+    color: #cccccc; /* Slightly grayed-out text for non-active links */
+    text-decoration: none;
+    font-size: 1em;
+    padding: 10px 15px; /* Good click area */
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for hover */
+    border-radius: 4px; /* Slightly rounded corners */
+}
+
+/* Hover Effect: Simple and effective */
+.nav-item:hover {
+    color: #ffffff; /* Brightens the text */
+    background-color: #333333; /* Darkens the background slightly */
+}
+
+/* Distinct styling for the "Application Readers" link */
+.application-link {
+    background-color: #e74c3c; /* A distinct, eye-catching color (like a call-to-action) */
+    color: white;
+    font-weight: bold;
+    border: 1px solid #c0392b;
+}
+
+.application-link:hover {
+    background-color: #c0392b; /* A darker shade on hover */
+    color: white;
+}
+
+/* --- Main Content Styling (Example) --- */
+main {
+    padding: 20px 30px;
+}

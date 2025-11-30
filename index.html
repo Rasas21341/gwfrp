@@ -3,46 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GWFRP</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        a {
-            display: inline-block;
-            padding: 14px 24px;
-            background: #222;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 10px;
-            transition: 0.2s;
-            border: 1px solid #333;
-        }
-
-        a:hover {
-            background: #333;
-            transform: translateY(-3px);
-        }
-    </style>
+    <title>GWFRP - Home</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <h1>GWFRP Website</h1>
-    <a href="/applications">Go to Applications</a>
+
+    <header>
+        <nav class="navbar">
+            <a href="/" class="site-title">GWFRP</a>
+            
+            <div class="nav-links">
+                <a href="/departments" class="nav-item">Departments</a>
+                
+                <a href="/media" class="nav-item">Media</a>
+                
+                <a href="/applicationreaders" class="nav-item application-link">Application Readers</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to GWFRP</h1>
+        <p>This is the main content area of your site.</p>
+    </main>
+
 </body>
 </html>
