@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download My Awesome App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .version {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .features h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .features ul {
+            list-style: none;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            color: #34495e;
+        }
+        
+        .features li:before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .info {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #2c3e50;
+            font-size: 0.9em;
+        }
+        
+        .system-req {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .system-req h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .system-req p {
+            color: #856404;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 My Awesome App</h1>
+        <div class="version">Version 1.0.0</div>
+        
+        <!-- Platform Selection -->
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 15px; margin: 20px 0;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px; text-align: center;">Choose Your Platform:</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <button onclick="showWindows()" style="flex: 1; min-width: 120px; padding: 15px; border: none; border-radius: 10px; background: #0078d4; color: white; font-weight: bold; cursor: pointer;">
+                    💻 Windows
+                </button>
+                <button onclick="showMobile()" style="flex: 1; min-width: 120px; padding: 15px; border: none; border-radius: 10px; background: #34c759; color: white; font-weight: bold; cursor: pointer;">
+                    📱 Phone/Tablet
+                </button>
+            </div>
+        </div>
+        
+        <!-- Windows Download Section -->
+        <div id="windowsSection">
+            <a href="dist/MyAwesomeApp.exe" class="download-btn" download>
+                📥 Download for Windows
+            </a>
+            
+            <div class="features">
+                <h3>Features:</h3>
+                <ul>
+                    <li>Modern graphical interface</li>
+                    <li>Easy to use and navigate</li>
+                    <li>Built-in calculator</li>
+                    <li>Lightweight and fast</li>
+                    <li>No installation required</li>
+                </ul>
+            </div>
+            
+            <div class="info">
+                <strong>📦 File Size:</strong> 9.9 MB<br>
+                <strong>✅ Status:</strong> Built and ready to distribute!<br>
+                <strong>📍 Location:</strong> dist\MyAwesomeApp.exe<br>
+                <strong>🛡️ Safe & Secure:</strong> No adware or bloatware<br>
+                <strong>✨ Free Forever:</strong> No subscriptions or hidden costs
+            </div>
+            
+            <div class="system-req">
+                <h4>System Requirements:</h4>
+                <p>💻 Windows 7 or later</p>
+                <p>💾 50 MB free disk space</p>
+                <p>🖥️ 1024x768 display resolution</p>
+            </div>
+        </div>
+        
+        <!-- Mobile Section -->
+        <div id="mobileSection" style="display: none;">
+            <a href="mobile-app.html" class="download-btn" target="_blank">
+                📱 Open Mobile App
+            </a>
+            
+            <div class="features">
+                <h3>Mobile Features:</h3>
+                <ul>
+                    <li>Works on iPhone, Android, tablets</li>
+                    <li>Runs in your web browser</li>
+                    <li>Add to home screen like a native app</li>
+                    <li>Same great calculator and features</li>
+                    <li>No download or installation needed</li>
+                </ul>
+            </div>
+            
+            <div class="info" style="background: #d4edda; border-left: 4px solid #28a745;">
+                <strong>💡 How to Install:</strong><br>
+                1. Click "Open Mobile App" above<br>
+                2. On iPhone: Tap Share → Add to Home Screen<br>
+                3. On Android: Tap Menu (⋮) → Add to Home screen<br>
+                4. Use it like a regular app!
+            </div>
+            
+            <div class="system-req">
+                <h4>Compatible With:</h4>
+                <p>📱 iPhone (iOS 12+)</p>
+                <p>🤖 Android phones and tablets</p>
+                <p>📲 iPad and other tablets</p>
+                <p>🌐 Any device with a web browser</p>
+            </div>
+        </div>
+    
+    <script>
+        function showWindows() {
+            document.getElementById('windowsSection').style.display = 'block';
+            document.getElementById('mobileSection').style.display = 'none';
+        }
+        
+        function showMobile() {
+            document.getElementById('windowsSection').style.display = 'none';
+            document.getElementById('mobileSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
