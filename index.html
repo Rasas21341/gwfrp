@@ -343,7 +343,10 @@
 
         function showUserPage(username) {
             document.body.innerHTML = `
-                <div style="width:100vw;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;">
+                <div style="width:100vw;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                    <div style="color:#fff;font-size:1.3rem;text-align:center;margin-bottom:1.5rem;opacity:0.7;">
+                        ${window.location.origin}/${username.toLowerCase()}
+                    </div>
                     <div style="color:#fff;font-size:2rem;text-align:center;">
                         <div style="margin-bottom:2rem;">${username}</div>
                         <div style="background:#18181b;padding:2rem 3rem;border-radius:18px;box-shadow:0 2px 16px #0007;">
