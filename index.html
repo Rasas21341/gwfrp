@@ -1,1 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .login-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.7rem;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background: #0056b3;
+        }
+        .login-container .message {
+            margin-top: 1rem;
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+    <script>
 
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if(username === 'Ryan' && password === 'Ryan') {
+                showDashboard(username);
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').textContent = 'Invalid username or password.';
+            }
+        });
+
+        function showDashboard(username) {
+            document.body.innerHTML = `
+            <div class="sidebar">
+                <div class="logo">guns.lol</div>
+                <ul class="nav">
+                    <li class="active">Account</li>
+                    <li>Customize</li>
+                    <li>Links</li>
+                    <li>Premium</li>
+                    <li>Image Host</li>
+                    <li>Templates</li>
+                    <li><button class="user-page-btn">User Page</button></li>
+                </ul>
+                <div class="profile">
+                    <div class="avatar"></div>
+                    <div class="username">${username}</div>
+                    <div class="uid">UID 123,456</div>
+                </div>
+            </div>
+            <div class="main-content">
+                <h2>All Badges</h2>
+                <div class="badges-grid">
+                    <div class="badge"><span class="badge-icon owner"></span> Owner</div>
+                    <div class="badge"><span class="badge-icon staff"></span> Staff</div>
+                    <div class="badge"><span class="badge-icon verified"></span> Verified</div>
+                    <div class="badge"><span class="badge-icon imagehost"></span> Image Host</div>
+                    <div class="badge"><span class="badge-icon booster"></span> Server Booster</div>
+                    <div class="badge"><span class="badge-icon christmas"></span> Christmas 2024</div>
+                    <div class="badge"><span class="badge-icon second"></span> Second Place</div>
+                    <div class="badge"><span class="badge-icon helper"></span> Helper</div>
+                    <div class="badge"><span class="badge-icon donor"></span> Donor</div>
+                    <div class="badge"><span class="badge-icon domain"></span> Domain Legend</div>
+                    <div class="badge"><span class="badge-icon bug"></span> Bug Hunter</div>
+                    <div class="badge"><span class="badge-icon million"></span> The Million</div>
+                    <div class="badge"><span class="badge-icon third"></span> Third Place</div>
+                    <div class="badge"><span class="badge-icon premium"></span> Premium</div>
+                    <div class="badge"><span class="badge-icon gifter"></span> Gifter</div>
+                    <div class="badge"><span class="badge-icon og"></span> OG</div>
+                    <div class="badge"><span class="badge-icon easter"></span> Easter 2025</div>
+                    <div class="badge"><span class="badge-icon winner"></span> Winner</div>
+                </div>
+                <div class="custom-badges">
+                    <h3>Custom Badges <span class="new">New</span></h3>
+                    <button class="purchase">Purchase</button>
+                    <button class="preview">Preview Custom Badge</button>
+                </div>
+                <div class="upgrade">
+                    <h3>Upgrade to Premium</h3>
+                    <p>With guns.lol Premium you can reorder, recolor, and toggle each badge individually.</p>
+                    <button class="upgrade-btn">Upgrade Now</button>
+                    <div class="linkr-row">
+                        <span class="linkr-label">linkr.lol/</span><input id="linkr-input" type="text" placeholder="yourname" class="linkr-input"><button class="claim-btn">Claim</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                body {
+                    background: #18181b;
+                    color: #fff;
+                    margin: 0;
+                    font-family: 'Segoe UI', Arial, sans-serif;
+                    display: flex;
+                }
+                .sidebar {
+                    width: 240px;
+                    background: #111113;
+                    height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                }
+                .logo {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    padding: 2rem 1.5rem 1rem 1.5rem;
+                    color: #e879f9;
+                }
+                .nav {
+                    list-style: none;
+                    padding: 0 1.5rem;
+                }
+                .nav li {
+                    padding: 0.8rem 0;
+                    color: #fff;
+                    opacity: 0.8;
+                    cursor: pointer;
+                    border-radius: 6px;
+                    transition: background 0.2s;
+                }
+                .nav li.active, .nav li:hover {
+                    background: #27272a;
+                    opacity: 1;
+                }
+                .user-page-btn {
+                    background: #a21caf;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    padding: 0.5rem 1.2rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    margin-top: 0.5rem;
+                }
+                .profile {
+                    background: #27272a;
+                    padding: 1rem 1.5rem;
+                    border-radius: 0 0 8px 8px;
+                    margin: 1rem 0 0 0;
+                    text-align: center;
+                }
+                .avatar {
+                    width: 48px;
+                    height: 48px;
+                    background: #444;
+                    border-radius: 50%;
+                    margin: 0 auto 0.5rem auto;
+                }
+                .username {
+                    font-weight: bold;
+                }
+                .uid {
+                    font-size: 0.85rem;
+                    color: #aaa;
+                }
+                .main-content {
+                    margin-left: 260px;
+                    padding: 2rem 3vw;
+                    width: 100%;
+                }
+                .badges-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }
+                .badge {
+                    background: #23232b;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    font-size: 1.1rem;
+                    gap: 0.8rem;
+                }
+                .badge-icon {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+                .badge-icon.owner { background: linear-gradient(135deg,#e879f9,#a21caf); border:2px solid #fff; }
+                .badge-icon.staff { background: #3b82f6; }
+                .badge-icon.verified { background: #38bdf8; }
+                .badge-icon.imagehost { background: #22d3ee; }
+                .badge-icon.booster { background: #f59e42; }
+                .badge-icon.christmas { background: #f43f5e; }
+                .badge-icon.second { background: #a3a3a3; }
+                .badge-icon.helper { background: #fbbf24; }
+                .badge-icon.donor { background: #10b981; }
+                .badge-icon.domain { background: #f472b6; }
+                .badge-icon.bug { background: #22d3ee; }
+                .badge-icon.million { background: #67e8f9; }
+                .badge-icon.third { background: #f59e42; }
+                .badge-icon.premium { background: #a21caf; }
+                .badge-icon.gifter { background: #f472b6; }
+                .badge-icon.og { background: #fde68a; }
+                .badge-icon.easter { background: #f9a8d4; }
+                .badge-icon.winner { background: #facc15; }
+                .custom-badges {
+                    background: #23232b;
+                    padding: 1.2rem 1.5rem;
+                    border-radius: 8px;
+                    margin-bottom: 2rem;
+                }
+                .custom-badges .new {
+                    background: #a21caf;
+                    color: #fff;
+                    font-size: 0.8rem;
+                    padding: 0.2rem 0.6rem;
+                    border-radius: 12px;
+                    margin-left: 0.5rem;
+                }
+                .custom-badges button {
+                    background: #a21caf;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    padding: 0.5rem 1.2rem;
+                    margin-right: 0.7rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+                .custom-badges button.preview {
+                    background: #23232b;
+                    color: #fff;
+                    border: 1px solid #a21caf;
+                }
+                .upgrade {
+                    background: #23232b;
+                    padding: 1.2rem 1.5rem;
+                    border-radius: 8px;
+                }
+                .upgrade-btn {
+                    background: #e879f9;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    padding: 0.7rem 1.5rem;
+                    font-size: 1rem;
+                    margin-top: 1rem;
+                    cursor: pointer;
+                }
+                .linkr-row {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 1.2rem;
+                }
+                .linkr-label {
+                    background: #18181b;
+                    color: #fff;
+                    padding: 0.5rem 0.7rem;
+                    border-radius: 4px 0 0 4px;
+                    border: 1px solid #333;
+                    border-right: none;
+                    font-size: 1rem;
+                }
+                .linkr-input {
+                    padding: 0.5rem 1rem;
+                    border: 1px solid #333;
+                    border-left: none;
+                    border-radius: 0 4px 4px 0;
+                    font-size: 1rem;
+                    background: #23232b;
+                    color: #fff;
+                    width: 180px;
+                }
+                .claim-btn {
+                    margin-left: 0.7rem;
+                    background: #a21caf;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    padding: 0.5rem 1.2rem;
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+            </style>
+            `;
+            document.querySelector('.user-page-btn').onclick = function() {
+                showUserPage(username);
+            };
+        }
+
+        function showUserPage(username) {
+            document.body.innerHTML = `
+                <div style="width:100vw;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;">
+                    <div style="color:#fff;font-size:2rem;text-align:center;">
+                        <div style="margin-bottom:2rem;">${username}</div>
+                        <div style="background:#18181b;padding:2rem 3rem;border-radius:18px;box-shadow:0 2px 16px #0007;">
+                            <div style="font-size:2rem;font-weight:bold;text-shadow:0 0 8px #fff;">theboyrp1234</div>
+                            <div style="margin:1.5rem 0;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="icon" style="width:32px;height:32px;filter:drop-shadow(0 0 4px #a21caf);">
+                            </div>
+                            <div style="color:#fff;opacity:0.7;font-size:1.1rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                                <span style="font-size:1.2rem;">&#128065;</span> 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+    </script>
+</body>
+</html>
