@@ -339,18 +339,33 @@
                 }
             </style>
             `;
-            document.querySelector('.user-page-btn').onclick = function() {
-                window.history.pushState({}, '', '/' + username.toLowerCase());
-                showUserPage(username);
+            // Attach event after DOM is ready
+            setTimeout(function() {
+                var userPageBtn = document.querySelector('.user-page-btn');
+                if(userPageBtn) {
+                    userPageBtn.onclick = function() {
+                        window.history.pushState({}, '', '/' + username.toLowerCase());
+                        showUserPage(username);
+                    };
+                }
+            }, 0);
+
+            // Handle browser navigation (back/forward)
+            window.onpopstate = function() {
+                if(window.location.pathname === '/' + username.toLowerCase()) {
+                    showUserPage(username);
+                } else {
+                    showDashboard(username);
+                }
             };
         }
 
         function showUserPage(username) {
+            // Only show owner icon for Ryan/Ryan
+            const isOwner = username === 'Ryan';
             document.body.innerHTML = `
                 <div style="width:100vw;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;">
-                    <div style="color:#fff;font-size:1.3rem;text-align:center;margin-bottom:1.5rem;opacity:0.7;">
-                        ${window.location.origin}/${username.toLowerCase()}
-                    </div>
+                    <div style=\"color:#fff;opacity:0.6;font-size:1.1rem;margin-bottom:1.2rem;\">${window.location.origin}/${username.toLowerCase()}</div>
                     <div style="color:#fff;font-size:2rem;text-align:center;">
                         <div style="margin-bottom:2rem;">${username}</div>
                         <div style="background:#18181b;padding:2rem 3rem;border-radius:18px;box-shadow:0 2px 16px #0007;">
@@ -361,6 +376,7 @@
                             <div style="color:#fff;opacity:0.7;font-size:1.1rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                                 <span style="font-size:1.2rem;">&#128065;</span> 1
                             </div>
+                            ${isOwner ? `<div style=\"margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;\"><span style=\"display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e879f9,#a21caf);border:2px solid #fff;\"></span><span style=\"font-size:1.1rem;\">Owner</span></div>` : ''}
                         </div>
                     </div>
                 </div>
@@ -370,4 +386,3 @@
     </script>
 </body>
 </html>
-
