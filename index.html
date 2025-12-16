@@ -77,7 +77,10 @@
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            if(username === 'Ryan' && password === 'Ryan') {
+            if(
+                (username === 'Ryan' && password === 'Ryan') ||
+                (username === 'Ryan' && password === 'STAFFING')
+            ) {
                 showDashboard(username);
             } else {
                 document.getElementById('message').style.color = 'red';
