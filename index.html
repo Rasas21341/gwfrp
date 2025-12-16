@@ -110,7 +110,7 @@
             <div class="main-content">
                 <h2>All Badges</h2>
                 <div class="badges-grid">
-                    <div class="badge"><span class="badge-icon owner"></span> Owner</div>
+                    ${username === 'Ryan' ? '<div class="badge"><span class="badge-icon owner"></span> Owner</div>' : ''}
                     <div class="badge"><span class="badge-icon staff"></span> Staff</div>
                     <div class="badge"><span class="badge-icon verified"></span> Verified</div>
                     <div class="badge"><span class="badge-icon imagehost"></span> Image Host</div>
@@ -339,16 +339,18 @@
                 }
             </style>
             `;
-            // Attach event after DOM is ready
-            setTimeout(function() {
-                var userPageBtn = document.querySelector('.user-page-btn');
-                if(userPageBtn) {
-                    userPageBtn.onclick = function() {
-                        window.history.pushState({}, '', '/' + username.toLowerCase());
-                        showUserPage(username);
-                    };
+
+            // Use event delegation for user page and back buttons
+            document.body.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('user-page-btn')) {
+                    window.history.pushState({}, '', '/' + username.toLowerCase());
+                    showUserPage(username);
                 }
-            }, 0);
+                if (e.target && e.target.classList.contains('back-to-dashboard-btn')) {
+                    window.history.pushState({}, '', '/dashboard');
+                    showDashboard(username);
+                }
+            });
 
             // Handle browser navigation (back/forward)
             window.onpopstate = function() {
@@ -378,6 +380,7 @@
                             </div>
                             ${isOwner ? `<div style=\"margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;\"><span style=\"display:inline-block;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e879f9,#a21caf);border:2px solid #fff;\"></span><span style=\"font-size:1.1rem;\">Owner</span></div>` : ''}
                         </div>
+                        <button class="back-to-dashboard-btn" style="margin-top:2rem;background:#a21caf;color:#fff;border:none;border-radius:4px;padding:0.7rem 1.5rem;font-size:1rem;cursor:pointer;">Back to Dashboard</button>
                     </div>
                 </div>
             `;
