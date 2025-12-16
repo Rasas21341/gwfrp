@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="supabase.js"></script>
     <style>
         html, body {
             font-family: Arial, sans-serif;
@@ -261,30 +264,143 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
-            <div class="message" id="message"></div>
-        </form>
+    <div class="login-container pro-login">
+        <div class="login-card">
+            <div class="login-tabs">
+                <button id="tab-login" class="active">Login</button>
+                <button id="tab-register">Create Account</button>
+            </div>
+            <form id="loginForm" class="login-form">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="email" required autocomplete="username">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                <button type="submit">Login</button>
+                <div class="message" id="login-message"></div>
+            </form>
+            <form id="registerForm" class="login-form" style="display:none;">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" name="email" required autocomplete="username">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="password" required autocomplete="new-password">
+                <button type="submit">Create Account</button>
+                <div class="message" id="register-message"></div>
+            </form>
+        </div>
     </div>
+            .pro-login {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #18181b;
+            }
+            .login-card {
+                background: #23232b;
+                border-radius: 16px;
+                box-shadow: 0 4px 32px #000a;
+                padding: 2.5rem 2.5rem 2rem 2.5rem;
+                min-width: 340px;
+                width: 100%;
+                max-width: 370px;
+            }
+            .login-tabs {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+            .login-tabs button {
+                flex: 1;
+                background: #18181b;
+                color: #fff;
+                border: none;
+                border-radius: 8px 8px 0 0;
+                padding: 0.8rem 0;
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .login-tabs button.active {
+                background: #a21caf;
+                color: #fff;
+            }
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .login-form label {
+                color: #fff;
+                font-weight: 500;
+            }
+            .login-form input {
+                padding: 0.7rem 1rem;
+                border-radius: 6px;
+                border: 1px solid #333;
+                background: #18181b;
+                color: #fff;
+                font-size: 1rem;
+            }
+            .login-form button[type="submit"] {
+                background: #a21caf;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                padding: 0.7rem 1.2rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-top: 0.5rem;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .login-form button[type="submit"]:hover {
+                background: #7c159e;
+            }
+            .login-form .message {
+                margin-top: 0.5rem;
+                min-height: 1.2rem;
+                color: #e43f5a;
+                font-size: 0.98rem;
+            }
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // Login/Register tab switching
+        document.getElementById('tab-login').onclick = function() {
+            document.getElementById('tab-login').classList.add('active');
+            document.getElementById('tab-register').classList.remove('active');
+            document.getElementById('loginForm').style.display = '';
+            document.getElementById('registerForm').style.display = 'none';
+        };
+        document.getElementById('tab-register').onclick = function() {
+            document.getElementById('tab-register').classList.add('active');
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = '';
+        };
+
+        // Supabase login
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            if(
-                (username === 'Ryan' && password === 'Ryan') ||
-                (username === 'Ryan1' && password === 'STAFFING')
-            ) {
-                showDashboard(username);
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+            if (error) {
+                document.getElementById('login-message').textContent = error.message;
             } else {
-                document.getElementById('message').style.color = 'red';
-                document.getElementById('message').textContent = 'Invalid username or password.';
+                document.getElementById('login-message').textContent = '';
+                showDashboard(email.split('@')[0]);
+            }
+        });
+
+        // Supabase register
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const { data, error } = await window.supabaseClient.auth.signUp({ email, password });
+            if (error) {
+                document.getElementById('register-message').textContent = error.message;
+            } else {
+                document.getElementById('register-message').textContent = 'Account created! Please check your email to verify.';
             }
         });
 
@@ -300,7 +416,7 @@
                         <li>Image Host</li>
                         <li>Templates</li>
                         <li><button class="user-page-btn">User Page</button></li>
-                        <li><button class="experiences-btn" style="background:#a21caf;color:#fff;border:none;border-radius:4px;padding:0.5rem 1.2rem;font-size:1rem;margin-top:0.5rem;cursor:pointer;width:100%;">Experiences</button></li>
+                        <li><button class="experiences-btn" style="background:none;color:#fff;border:none;border-radius:6px;padding:0.8rem 0;width:100%;text-align:left;cursor:pointer;transition:background 0.2s;">Experiences</button></li>
                     </ul>
                     <div class="profile">
                         <div class="avatar"></div>
@@ -340,7 +456,55 @@
                     window.history.pushState({}, '', '/dashboard');
                     showDashboard(username);
                 }
+                if (e.target && e.target.classList.contains('experiences-btn')) {
+                    showExperiencesEditor(username);
+                }
             });
+        }
+
+        function showExperiencesEditor(username) {
+            // Modal/page for editing experiences
+            const experiences = JSON.parse(localStorage.getItem('userExperiences') || '[]');
+            document.body.innerHTML = `
+                <div class="sidebar">
+                    <div class="logo">linkr.lol</div>
+                    <ul class="nav">
+                        <li><button class="back-to-dashboard-btn" style="background:none;color:#fff;border:none;border-radius:6px;padding:0.8rem 0;width:100%;text-align:left;cursor:pointer;transition:background 0.2s;">Back</button></li>
+                    </ul>
+                </div>
+                <div class="main-content">
+                    <h2>Edit Experiences</h2>
+                    <form id="add-experience-form" style="margin-bottom:2rem;">
+                        <input type="text" id="exp-name" placeholder="Experience Name" required style="margin-right:1rem;padding:0.5rem 1rem;border-radius:4px;border:1px solid #333;background:#23232b;color:#fff;">
+                        <input type="text" id="exp-rank" placeholder="Rank" required style="margin-right:1rem;padding:0.5rem 1rem;border-radius:4px;border:1px solid #333;background:#23232b;color:#fff;">
+                        <button type="submit" style="background:#a21caf;color:#fff;border:none;border-radius:4px;padding:0.5rem 1.2rem;cursor:pointer;">Add</button>
+                    </form>
+                    <div id="experiences-list">
+                        ${experiences.length === 0 ? '<div style="opacity:0.7;">No experiences yet.</div>' : experiences.map((exp, i) => `<div style=\"margin-bottom:0.7rem;display:flex;align-items:center;justify-content:space-between;\"><span><b>${exp.name}</b> <span style=\"opacity:0.7;\">(${exp.rank})</span></span><button class=\"remove-exp-btn\" data-index=\"${i}\" style=\"background:#e43f5a;color:#fff;border:none;border-radius:4px;padding:0.2rem 0.7rem;cursor:pointer;\">Remove</button></div>`).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById('add-experience-form').onsubmit = function(ev) {
+                ev.preventDefault();
+                const name = document.getElementById('exp-name').value.trim();
+                const rank = document.getElementById('exp-rank').value.trim();
+                if (name && rank) {
+                    experiences.push({name, rank});
+                    localStorage.setItem('userExperiences', JSON.stringify(experiences));
+                    showExperiencesEditor(username);
+                }
+            };
+            document.querySelectorAll('.remove-exp-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    experiences.splice(idx, 1);
+                    localStorage.setItem('userExperiences', JSON.stringify(experiences));
+                    showExperiencesEditor(username);
+                };
+            });
+            document.querySelector('.back-to-dashboard-btn').onclick = function() {
+                showDashboard(username);
+            };
         }
 
         function showUserPage(username) {
