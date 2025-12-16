@@ -123,7 +123,6 @@
         .main-content input, .main-content .linkr-label {
             color: #fff;
         }
-        }
         .badges-grid {
             display: flex;
             flex-wrap: wrap;
@@ -301,6 +300,7 @@
                         <li>Image Host</li>
                         <li>Templates</li>
                         <li><button class="user-page-btn">User Page</button></li>
+                        <li><button class="experiences-btn" style="background:#a21caf;color:#fff;border:none;border-radius:4px;padding:0.5rem 1.2rem;font-size:1rem;margin-top:0.5rem;cursor:pointer;width:100%;">Experiences</button></li>
                     </ul>
                     <div class="profile">
                         <div class="avatar"></div>
@@ -359,13 +359,29 @@
                             <div style="color:#fff;opacity:0.7;font-size:1.1rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                                 <span style="font-size:1.2rem;">&#128065;</span> 1
                             </div>
-                            ${isOwner ? `<div style="margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;"><span class="badge-icon owner" style="display:inline-block;width:28px;height:28px;position:relative;"><img src='https://cdn3.emoji.gg/emojis/37208-owner-glow.png' alt='Owner' style='width:28px;height:28px;vertical-align:middle;'></span></div>` : ''}
-                            <div style="margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;"><span class="badge-icon candycane" style="display:inline-block;width:20px;height:20px;position:relative;"><img src='https://blurr.lol/assets/badges/christmascandy.png' alt='Candy Cane' style='width:20px;height:20px;vertical-align:middle;'></span></div>
+                            ${isOwner ? `<div style=\"margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;\"><span class=\"badge-icon owner\" style=\"display:inline-block;width:28px;height:28px;position:relative;\"><img src='https://cdn3.emoji.gg/emojis/37208-owner-glow.png' alt='Owner' style='width:28px;height:28px;vertical-align:middle;'></span></div>` : ''}
+                            <div style=\"margin-top:1.2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;\"><span class=\"badge-icon candycane\" style=\"display:inline-block;width:20px;height:20px;position:relative;\"><img src='https://blurr.lol/assets/badges/christmascandy.png' alt='Candy Cane' style='width:20px;height:20px;vertical-align:middle;'></span></div>
+                        </div>
+                        <div style="margin-top:2rem;background:#23232b;padding:1.5rem 2rem;border-radius:12px;max-width:400px;margin-left:auto;margin-right:auto;">
+                            <h3 style="color:#fff;margin-bottom:1rem;">Experiences</h3>
+                            <div id="user-experiences-list" style="color:#fff;text-align:left;">
+                                <!-- Experiences will be listed here -->
+                            </div>
                         </div>
                         <button class="back-to-dashboard-btn" style="margin-top:2rem;background:#a21caf;color:#fff;border:none;border-radius:4px;padding:0.7rem 1.5rem;font-size:1rem;cursor:pointer;">Back to Dashboard</button>
                     </div>
                 </div>
             `;
+            // Example: Render static experiences for now
+            const experiences = JSON.parse(localStorage.getItem('userExperiences') || '[]');
+            const list = document.getElementById('user-experiences-list');
+            if (list) {
+                if (experiences.length === 0) {
+                    list.innerHTML = '<div style="opacity:0.7;">No experiences yet.</div>';
+                } else {
+                    list.innerHTML = experiences.map(exp => `<div style=\"margin-bottom:0.7rem;\"><b>${exp.name}</b> <span style=\"opacity:0.7;\">(${exp.rank})</span></div>`).join('');
+                }
+            }
         }
     </script>
 </body>
